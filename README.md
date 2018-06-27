@@ -7,42 +7,46 @@ I am framing this readme file in form of notes with step by step info about the 
 
 #So lets get started with importing the chatbot first
 
-  from chatterbot import ChatBot   #importing ChatBot class
+    from chatterbot import ChatBot   #importing ChatBot class
 
 #Creating an instance for this ChatBot 
 
-  bot = ChatBot()                  # this will be the instance of chatbot class and with this we can utilize its inbuilt functions.
+    bot = ChatBot()                  # this will be the instance of chatbot class and with this we can utilize its inbuilt functions.
 
 #While creating instance , we can give pass various arguements to it like below:
   
   #only name as arguement
-  bot = ChatBot('Norman')       # name of chatbot --- Ques- Where do we see this name after execution of code?
+         
+     bot = ChatBot('Norman')       # name of chatbot --- Ques- Where do we see this name after execution of code?
   
  #OR
   
   #name and storage adapter as arguements
-  bot = ChatBot(
-                'Norman',
-                 storage_adapter='chatterbot.storage.SQLStorageAdapter',    # tells chatbot to connect to SQL database
-                database='./database.sqlite3'                               # path of that database 
-                 ) 
-    # We could have used MongoDB Storage Adapter as well. So depending on available database, we can connect our chatbot to respective   databases. For Mongo DB, write your code like this 'chatterbot.storage.MongoDatabaseAdapter'
+  
+    bot = ChatBot(
+                  'Norman',
+                   storage_adapter='chatterbot.storage.SQLStorageAdapter',    # tells chatbot to connect to SQL database
+                  database='./database.sqlite3'                               # path of that database 
+                   ) 
+                   
+ # We could have used MongoDB Storage Adapter as well. So depending on available database, we can connect our chatbot to respective   databases. For Mongo DB, write your code like this 'chatterbot.storage.MongoDatabaseAdapter'
   
   #OR
 
   #name,storage adapters and Input/Output adapters
-  bot = ChatBot(
-                'Norman',
-                storage_adapter='chatterbot.storage.SQLStorageAdapter',
-                database='./database.sqlite3',
-                input_adapter='chatterbot.input.TerminalAdapter',           #From where the chatbot should get input i.e from console input 
-                                                                            #or from a variable
-                output_adapter='chatterbot.output.TerminalAdapter'          # where to display the output
-                )
  
+     bot = ChatBot(
+                    'Norman',
+                    storage_adapter='chatterbot.storage.SQLStorageAdapter',
+                    database='./database.sqlite3',
+                    input_adapter='chatterbot.input.TerminalAdapter',           #From where the chatbot should get input i.e from 
+                                                                                #console input or from a variable
+                    output_adapter='chatterbot.output.TerminalAdapter'          # where to display the output
+                    )
+
    #OR 
     
-    #name, storage adapters,Input/Output adapters and Logical adapters 
+   #name, storage adapters,Input/Output adapters and Logical adapters 
     bot = ChatBot(
                   'Norman',
                   storage_adapter='chatterbot.storage.SQLStorageAdapter',
