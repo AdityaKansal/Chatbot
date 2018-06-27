@@ -28,11 +28,10 @@ I am framing this readme file in form of notes with step by step info about the 
                    storage_adapter='chatterbot.storage.SQLStorageAdapter',    # tells chatbot to connect to SQL database
                   database='./database.sqlite3'                               # path of that database 
                    ) 
-                   
- # We could have used MongoDB Storage Adapter as well. So depending on available database, we can connect our chatbot to respective   databases. For Mongo DB, write your code like this 'chatterbot.storage.MongoDatabaseAdapter'
-  
-  #OR
+#We could have used MongoDB Storage Adapter as well. So depending on available database, we can connect our chatbot to respective          databases. For Mongo DB, write your code like this 'chatterbot.storage.MongoDatabaseAdapter'
 
+  #OR
+    
   #name,storage adapters and Input/Output adapters
  
      bot = ChatBot(
