@@ -46,17 +46,18 @@ I am framing this readme file in form of notes with step by step info about the 
    #OR 
     
    #name, storage adapters,Input/Output adapters and Logical adapters 
-    bot = ChatBot(
-                  'Norman',
-                  storage_adapter='chatterbot.storage.SQLStorageAdapter',
-                  database='./database.sqlite3',
-                  input_adapter='chatterbot.input.TerminalAdapter',           
-                  output_adapter='chatterbot.output.TerminalAdapter',
-                  logic_adapters=[                                          #perform logical opertions          
-                                  'chatterbot.logic.MathematicalEvaluation', # returns sum/product etc of numbers
-                                   'chatterbot.logic.TimeLogicAdapter'       # returns the system time
-                                 ]
-                    )
+       
+       bot = ChatBot(
+                      'Norman',
+                      storage_adapter='chatterbot.storage.SQLStorageAdapter',
+                      database='./database.sqlite3',
+                      input_adapter='chatterbot.input.TerminalAdapter',           
+                      output_adapter='chatterbot.output.TerminalAdapter',
+                      logic_adapters=[                                          #perform logical opertions          
+                                      'chatterbot.logic.MathematicalEvaluation', # returns sum/product etc of numbers
+                                       'chatterbot.logic.TimeLogicAdapter'       # returns the system time
+                                     ]
+                        )
 
  #We have other logical operators as well like Best Match logical operator. It will return the best response to the input message. 
     
