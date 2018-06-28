@@ -60,8 +60,51 @@ I am framing this readme file in form of notes with step by step info about the 
                         )
 
  #We have other logical operators as well like Best Match logical operator. It will return the best response to the input message. 
-    
+ If you want to use bestmatch logic adapter, you can do it in below way:
+            
+            logic_adapters = [
+                    {
+                        'import_path' : 'chatterbot.logic.BestMatch',
+                        'statement_comparision_function' : 'chatterbot.comparisions.levenshtein_distance',
+                        'response_selection_method' : 'chatterbot.response_selection.get_first_response'
+
+
+                    }
+ if you see we have some extra arguments here. 
+ 1. Statement comparision function- this will tell you what function to use to find similar question/answer in database.
+ We can use levenshtein_distance,JaccardSimilarity,SentimentComparison,SynsetDistance etc there depending on what suits our requirement.
+ You can use these like below:
+            
+                    'statement_comparision_function' : 'chatterbot.comparisions.levenshtein_distance',
+                    'statement_comparision_function' : 'chatterbot.comparisions.jaccard_similarity',
+                    'statement_comparision_function' : 'chatterbot.comparisions.sentiment_comparison',
+                    'statement_comparision_function' : 'chatterbot.comparisions.synset_distance',
+
+Also, you can create your own similarity function and pass it while initializing the chatbot instance.Your function should return 0 or 1 based on similarity.
+
+2. Response Selection method - In previous step, you got all the matches for your input based on the input, now you can select a response out of them. You can do in different ways and these are clear with thier name itself:
+
+            'response_selection_method' : 'chatterbot.response_selection.get_first_response'
+            'response_selection_method' : 'chatterbot.response_selection.get_most_frequent_response'
+            'response_selection_method' : 'chatterbot.response_selection.get_random_response'
  
+ 
+ Other logical adapters are:
+ 
+ 1. chatterbot.logic.LowConfidenceAdapter- They will compare the sentences and return a default response if the similarity scores goes below threshold value.
+        
+            'import_path': 'chatterbot.logic.LowConfidenceAdapter',
+            'threshold': 0.65,
+            'default_response': 'I am sorry, but I do not understand.'
+ 
+ 2. Specific Response Adapter- In case you want to give specific response to particular statement, you can use this adapter.
+ 
+            
+            'import_path': 'chatterbot.logic.SpecificResponseAdapter',
+            'input_text': 'Help me!',
+            'output_text': 'Ok, here is a link: http://chatterbot.rtfd.org'
+  
+  
 #Traning your chatbot
 #You can train your chatbot using a list trainer. List trainer will take the traning data in form of a list of string/sentences/conversation
 #First set the trainer and then provide the data
