@@ -1,0 +1,202 @@
+    <html>
+<head>
+<title>ChatBot</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"" crossorigin="anonymous"></script>
+<script type=text/javascript>
+  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+<style type = "text/css">
+body {
+	font-family: arial, sans-serif;
+	margin: 0;
+	background-color: #f2f2f2;
+}
+
+#header {
+	width: 100%;
+	height: 60px;
+	background-color: #699F62;
+	box-shadow: 0px 4px 2px #333;
+}
+
+#header>h1 {
+	padding: 12px;
+	width: 1024px;
+  text-align: center;
+	margin: 0px auto;
+	color: white;
+}
+
+#container {
+	width: 1024px;
+	height: 500px;
+	margin: 0px auto;
+	margin-top:20px;
+	background-color: #FCFAF7;
+	border: 2px solid #333;
+  border-radius: 8px;
+	overflow: scroll;
+}
+
+#controls {
+	width: 1024px;
+	margin: 0px auto;
+}
+
+textarea {
+	resize: none;
+	width: 930px;
+  border-radius: 8px;
+	border: 2px solid #333;
+
+}
+
+#Send {
+	font-size: 28px; 
+  border-radius: 8px; 
+	position:absolute;
+}
+
+.Username{
+	color: blue;
+	font-weight: bold;
+}
+.bot{
+	color: green;
+	font-weight: bold;
+}
+
+.InputClass {
+    border: 2px solid #dedede;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+.OutputClass {
+    border-color: #ccc;
+    background-color: #E7FFCA;
+}
+.time-right{
+    float: right;
+    color: #aaa;
+    font-size: 14px;
+    padding-top: 11px;        
+}
+
+
+
+
+
+</style>
+</head>
+
+<body>
+
+	<script type="text/javascript">
+	
+    var username = "";
+    ;  
+	
+    function send_message(message,output_message){
+     var output_message = output_message;
+		var PrevStat = $("#container").html();
+		
+		$("#container").html(PrevStat + "<div class='InputClass OutputClass'><span class = 'current_message'>"+ "<span class = 'bot'>Chatbot : </span >" + output_message + "<span class='time-right'>"+GetTime()+"</span></span></div>");
+		$("#container").scrollTop($("#container").prop("scrollHeight"));
+     $(".current_message").hide();
+		$(".current_message").delay(250).fadeIn();
+		$(".current_message").removeClass("current_message");
+	}
+	
+	function ai(message,output_message){
+    	send_message(message,output_message);
+	
+	}
+    
+   function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+    }
+
+    function GetTime() {
+        var d = new Date();
+        var h = d.getHours();
+        var m = d.getMinutes();
+        var ampm = h >= 12 ? 'PM' : 'AM';
+        h = h % 12;
+        h = h ? h : 12;
+        m = m < 10 ? '0'+m : m;
+        return Time = h + ":" + m+ ' ' + ampm;
+    }
+	
+	$(function(){
+            
+    	$("#textbox").keypress(function(event){
+        	if(event.which == 13){
+        	if($("#enter").prop("checked")){
+        	$("#Send").click();
+        	event.preventDefault();
+        	}
+        	}
+    	
+    	});
+	
+    	$("#Send").click(function(){
+       var output_message = " "
+    		var username = "<span class = 'username'>You : </span>"
+    		var NewMessage = $("#textbox").val();
+        $("#textbox").val("");
+    		var PrevStat = $("#container").html();
+    		
+    		$("#container").html(PrevStat + "<div class = 'InputClass'>"+ username + NewMessage+" <span class='time-right'>"+GetTime()+"</span></div>");
+    		$("#container").scrollTop($("#container").prop("scrollHeight"));
+            
+           $.getJSON($SCRIPT_ROOT + '/process', {
+            a: NewMessage 
+          }, function(data) {
+             output_message = data.result;
+            ai(NewMessage,output_message)
+          });
+                    
+    		
+          
+    		;
+		
+    	});
+
+	});	
+	
+	
+	</script>
+    
+	<div id="header">
+		<h1>Rxclaim ChatBot V1.0 </h1>
+		<div id="container" >
+        
+    </div>
+        
+     <br>   
+		<div id="controls" >
+			<textarea  name = "textbox" id="textbox" placeholder="Enter your message here.."></textarea>
+			
+            <button id="Send">Send</button>
+			<br> 
+			<input checked type="checkbox" id="enter" />
+			 <label>Send on enter</label>
+		
+        </div>
+
+
+	</div>
+    
+
+</body>
+
+
+
+
+</html>
