@@ -14,7 +14,7 @@ class RxClaim_chatbot():
         from chatterbot import ChatBot
         from chatterbot.trainers import ListTrainer
         
-        path = 'C:/A_stuff/Learning/Machine Learning/ML_Experimental_Learning/ChatterBot/Rxclaim_ChatBot/Version 2.0/Rxclaim_ChatBot_V2.0/'
+        path = 'C:/A_stuff/Rxclaim_ChatBot_V2.0/'
         bot = ChatBot("Rxclaim_Wiki",
                       read_only=True,
                       preprocessors=[
