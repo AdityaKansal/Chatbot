@@ -1,5 +1,5 @@
 # Chatbot
-Creating a chatbot in Python(In-Progress task)
+Creating a chatbot in Python language(In-Progress task)
 I am framing this readme file in form of notes with step by step info about the process for creating chatbots and using its different functions.We will start from very basic and would be using python chatterbot package to create a functioning chatbot.
 
 #first step would be to import chatterbot.For installation purpose, you can directly use 'pip install chatterbot'. Refer for more details on : http://chatterbot.readthedocs.io/en/stable/tutorial.html
